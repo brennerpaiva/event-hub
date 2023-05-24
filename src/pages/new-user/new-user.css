@@ -1,0 +1,14 @@
+.form-login {
+    height: 100vh;
+    max-width: 350px;
+}
+
+.btn-cadastro{
+    background-color: #614EA6;
+    color: #fff;
+}
+
+.btn-cadastro:hover {
+    background-color: transparent;
+    color: #614EA6;
+}
