@@ -1,7 +1,16 @@
-.form-login {
-    height: 100vh;
-    max-width: 350px;
+.register-content {
+    width: 100%;
+    padding: 15%;
+    margin: auto;
+    background-color: #614EA6;
+    height: calc(100vh - 56px);
 }
+
+.form-login {
+    margin-top: 150px;
+}
+
+
 
 .btn-cadastro{
     background-color: #614EA6;

@@ -1,11 +1,13 @@
-import Login from "../src/pages/login";
-import NewUser from "../src/pages/new-user"
+import RoutesApp from "./routes";
+import { BrowserRouter } from "react-router-dom";
+import NavBar from "./components/navbar";
 
 function App() {
   return (
-    <div className="App">
-      <NewUser />
-    </div>
+    <BrowserRouter>
+      <NavBar/>
+      <RoutesApp/>
+    </BrowserRouter>
   );
 }
 

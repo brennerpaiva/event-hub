@@ -1,0 +1,21 @@
+.navbar {
+    background-color: #3b0f74;
+}
+
+.nav-item a{
+    color: #fff;
+    transition: 0.3s ease-in;
+    margin-right: 12px;
+}
+
+.nav-item a:hover{
+    color: red;
+}
+
+.navbar-toggler-icon {
+    color: white; 
+}
+
+ion-icon{
+    font-size: 25px;
+}

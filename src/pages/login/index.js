@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./login.css"
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../config/firebase";
+import { Link } from "react-router-dom";
 
 export default function Login() {
 
@@ -49,7 +50,7 @@ export default function Login() {
         </button>
         <div className="login-options">
           <a href="#" className="mx-2">Recuperar Senha</a>
-          <a href="#" className="mx-2">Cadastrar-se</a>
+          <Link to="/newuser" className="mx-2">Cadastrar-se</Link>
         </div>
       </form>
     </div>

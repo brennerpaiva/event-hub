@@ -31,8 +31,8 @@ export default function NewUser(){
       }
 
     return(
-        <div className="form-cadastro">
-            <form className="text-center form-login mx-auto mt-5">
+        <div className="register-content d-flex align-itens-center">
+            <form className="text-center form-login m-auto">
                 <h1 className="h3 mb-3 text-black font-weight-bold">Cadastro</h1>
                 <input onChange={(e) => setEmail(e.target.value)} type="email" className="form-control my-2" placeholder="email"></input>
                 <input onChange={(e) => setPassword(e.target.value)} type="password" className="form-control my-2" placeholder="senha"></input>

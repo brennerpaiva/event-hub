@@ -3,7 +3,7 @@
     padding: 15%;
     margin: auto;
     background-color: #614EA6;
-    height: 100vh;
+    height: calc(100vh - 56px);
 }
 
 .h3 {
