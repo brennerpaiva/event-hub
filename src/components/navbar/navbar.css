@@ -1,5 +1,10 @@
 .navbar {
     background-color: #3b0f74;
+    justify-content: space-between;
+}
+
+.navbar-brand {
+    margin-left: 20px;
 }
 
 .nav-item a{
