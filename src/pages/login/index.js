@@ -2,34 +2,43 @@ import React, { useState } from "react";
 import "./login.css"
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../config/firebase";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
+
+import { useSelector, useDispatch } from "react-redux";
+
 
 export default function Login() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const dispatch = useDispatch();
+
   function login1() {
     signInWithEmailAndPassword(auth, email, password)
-            .then(() => {
-                alert('Usuario logado')
-            })
-            .catch((error) => {
-                alert(error)
-            })
+        .then(() => {
+            alert('Usuario logado');
+            dispatch({type: 'LOG_IN', usuarioEmail: email})
+        })
+        .catch((error) => {
+            alert(error)
+        })     
     }
 
   return (
-    <div>
+      <div className="login-content d-flex align-itens-center">
 
-      <div class="login-content d-flex align-itens-center">
-        <form class="form-signin mx-auto my-auto">
-        <h1 class="h3 mb-3 font-weight-bold text-white">Login</h1>
+        {
+          useSelector(state => state.usuarioLogado) == true ? <Navigate to='/home'/> : null
+        }
+
+        <form className="form-signin mx-auto my-auto">
+        <h1 className="h3 mb-3 font-weight-bold text-white">Login</h1>
         <input
           onChange={(e)=> setEmail(e.target.value)}        
           type="email"
           id="inputEmail"
-          class="form-control my-2"
+          className="form-control my-2"
           placeholder="Seu email"
           required
           autofocus
@@ -38,12 +47,12 @@ export default function Login() {
           onChange={(e)=> setPassword(e.target.value)} 
           type="password"
           id="inputPassword"
-          class="form-control my-2"
+          className="form-control my-2"
           placeholder="Senha"
           required
         />
         <button 
-        class="btn btn-lg btn-primary btn-block my-2" 
+        className="btn btn-lg btn-primary btn-block my-2" 
         type="button"
         onClick={login1}>
           Login
@@ -53,7 +62,6 @@ export default function Login() {
           <Link to="/newuser" className="mx-2">Cadastrar-se</Link>
         </div>
       </form>
-    </div>
     </div>
   );
 }

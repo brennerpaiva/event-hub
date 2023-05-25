@@ -1,8 +1,13 @@
 import React from "react";
 import "./navbar.css"
 import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+
 
 export default function NavBar() {
+
+    const dispatch = useDispatch()
+
     return(
         <div>
             <nav className="navbar navbar-expand-lg ">
@@ -15,12 +20,30 @@ export default function NavBar() {
                         <li className="nav-item">
                             <Link to="/home">Home</Link>
                         </li>
-                        <li className="nav-item">
-                            <Link to="/newuser">Cadastrar</Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link to="/">Login</Link>
-                        </li>
+
+                        {
+                            useSelector(state => state.usuarioLogado) == true ?
+                        <>
+                            <li className="nav-item">
+                                <Link to="/">Publicar Evento</Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link to="/">Meus Eventos</Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link onClick={() => dispatch({type: 'LOG_OUT'})} >Sair</Link>
+                            </li>
+                        </>
+                        :
+                        <>
+                            <li className="nav-item">
+                                <Link to="/newuser">Cadastrar</Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link to="/">Login</Link>
+                            </li>
+                        </>
+                        }
                     </ul>
                 </div>
             </nav>

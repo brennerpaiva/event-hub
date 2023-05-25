@@ -1,6 +1,6 @@
 const INITAL_STATE = {
     usuarioEmail: '',
-    usuaioLogado: false,
+    usuarioLogado: false,
 };
 
 function usuarioReducer(state = INITAL_STATE, action) {
