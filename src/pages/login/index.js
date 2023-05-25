@@ -58,7 +58,7 @@ export default function Login() {
           Login
         </button>
         <div className="login-options">
-          <a href="#" className="mx-2">Recuperar Senha</a>
+          <Link to='/recoverpassword' className="mx-2">Recuperar Senha</Link>
           <Link to="/newuser" className="mx-2">Cadastrar-se</Link>
         </div>
       </form>
