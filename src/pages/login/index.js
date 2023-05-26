@@ -17,7 +17,6 @@ export default function Login() {
   function login1() {
     signInWithEmailAndPassword(auth, email, password)
         .then(() => {
-            alert('Usuario logado');
             dispatch({type: 'LOG_IN', usuarioEmail: email})
         })
         .catch((error) => {

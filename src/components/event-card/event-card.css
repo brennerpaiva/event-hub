@@ -1,0 +1,13 @@
+.footer-card{
+    display: flex;
+    justify-content: center;
+    color: #614ea6;
+    height: 35px;
+    align-items: center;
+    
+}
+
+.footer-card ion-icon{
+    font-size: 20px;
+    padding: 4px;
+}
