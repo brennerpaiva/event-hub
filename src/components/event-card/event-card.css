@@ -1,3 +1,14 @@
+
+.card-img-top {
+    max-height: 200px;
+    min-width: 100%;
+}
+.card-text {
+    max-height: 200px;
+    overflow: hidden;
+}
+
+
 .footer-card{
     display: flex;
     justify-content: center;

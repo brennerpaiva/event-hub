@@ -1,25 +1,36 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import './event-card.css'
+import { storage } from "../../config/firebase";
+import { ref, getDownloadURL } from "firebase/storage";
 
-export default function EventCard() {
-    return(
-            <div class="card col-md-3 col-sm-12" >
-                <img class="card-img-top" src="https://image-placeholder.com/images/actual-size/57x57.png   " alt="Imagem de capa do card"/>
-                <div class="card-body">
-                    <h5 class="card-title">Título do card</h5>
-                     <p class="card-text">Um exemplo de texto rápido para construir o título do card e fazer preencher o conteúdo do card.</p>
-                        
-                    <div className="row d-flex align-items-center">
-                        <div className="col-8">
-                            <Link href="#" class="btn btn-m btn-primary ">Visitar</Link>
-                        </div>
-                        <div className="footer-card col-4">
-                            <ion-icon name="eye"></ion-icon>
-                            <span>21</span>
-                        </div>
-                    </div>
-                </div>
-             </div>
-    )
+export default function EventCard({ eventKey, img, title, details, views }) {
+  const [imageUrl, setImageUrl] = useState('');
+
+  useEffect(() => {
+    const storageRef = ref(storage, `images/${img}`);
+    getDownloadURL(storageRef)
+      .then(url => setImageUrl(url))
+      .catch(error => console.log(error));
+  }, []);
+
+  return (
+    <div className="card col-md-3 col-sm-12">
+      <img className="card-img-top" src={imageUrl || "https://via.placeholder.com/500"} alt="Imagem de capa do card" />
+      <div className="card-body">
+        <h5 className="card-title">{title}</h5>
+        <p className="card-text">{details}</p>
+
+        <div className="row d-flex align-items-center">
+          <div className="col-8">
+            <Link to="#" className="btn btn-m btn-primary">Visitar</Link>
+          </div>
+          <div className="footer-card col-4">
+            <ion-icon name="eye"></ion-icon>
+            <span>{views}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
 }
