@@ -15,23 +15,20 @@ export default function Home() {
     const eventRef = collection(db, "eventos");
 
     useEffect(() => {
-      if (parameter) {       
+        if (parameter) {       
 
-        const qWhere = query(
-          eventRef,
-          orderBy("criacao", "desc"),
-          where("usuario", "==", usuarioEmail)
-        )
-        loadEvents(qWhere)
-        
-      } else {
-        const qOrderBy = query(
-          eventRef,
-          orderBy("criacao", "desc")
-        )
-
-        loadEvents(qOrderBy);    
-      }
+          const qWhere = query(
+            eventRef,
+            where("usuario", "==", usuarioEmail)
+          )
+          loadEvents(qWhere)
+          
+        } else {
+          const qOrderBy = query(
+            eventRef,
+          )
+          loadEvents(qOrderBy);    
+        }
     
       }, [parameter]);
 

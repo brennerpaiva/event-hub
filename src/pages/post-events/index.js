@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { storage, db } from "../../config/firebase";
 import { Link } from "react-router-dom";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { addDoc, collection } from "firebase/firestore"
-
+import { addDoc, updateDoc, collection, doc, getDoc} from "firebase/firestore"
+import { useParams } from "react-router-dom";
 
 import "./post-events.css"
 
@@ -20,14 +20,61 @@ export default function PostEvents(){
 
     const [msgType, setMsgType] = useState('')
     const [loading, setLoading] = useState(false)
+    const { id } = useParams();
+
+     useEffect(() => {
+        if(id) {
+            const editEventData = async () => {
+            const Ref = doc(db, 'eventos', id);
+            const eventDoc = await getDoc(Ref);
+            setTitle(eventDoc.data().titulo);
+            setType(eventDoc.data().tipo);
+            setDetails(eventDoc.data().detalhes);
+            setDate(eventDoc.data().data);
+            setTime(eventDoc.data().hora);
+            }
+            editEventData();
+        } else {
+            return
+        }
+        
     
+        //   const storageRef = ref(storage, `images/${eventDoc.data().imagem}`);
+        //   try {
+        //     const url = await getDownloadURL(storageRef);
+        //     setUrlImg(url);
+        //     setLoading(false)
+        //   } catch (error) {
+        //     console.error('Erro ao buscar a URL da imagem:', error);
+        //   }
+         }, [loading])
+ 
+    async function update() {
+        
+        // setLoading(true)
+        const docRef = doc(db, "eventos", id)
+        await updateDoc(docRef, {
+            titulo: title,
+            tipo: type,
+            detalhes: details,
+            data: date,
+            hora: time,      
+          })
+          .then(() => {
+            alert("Evento atualizado com sucesso!")
+          })
+          .catch((error) => {
+            alert(error)
+          })
+    }     
+        
+
 
     async function register() {
         const storageRef = ref(storage, `images/${image.name}`);
         const uploadTask = uploadBytes(storageRef, image);
-        setLoading(true)
+        // setLoading(true)
         
-
         await addDoc(collection(db, "eventos"), {
             titulo: title,
             tipo: type,
@@ -40,9 +87,9 @@ export default function PostEvents(){
             publico: true,
             criacao: new Date()
           })
-            .then(() => {
+          .then(() => {
                 setMsgType("sucess")
-                setLoading(false)
+                // setLoading(false)
                 
                 uploadTask
                 .then((snapshot) => {
@@ -54,31 +101,31 @@ export default function PostEvents(){
                 .catch((error) => {
                 alert("Erro ao fazer upload da imagem:", error);
                 });           
-        })
-            .catch((error) => {
+          })
+        .catch((error) => {
               console.log("erro ao registrar" + error);
               setMsgType("error")
-              setLoading(false)
+            //   setLoading(false)
             });
         }
 
     return(
         <>
-        <div className="col-12 mt-5">
+        <div className="col-12 mt-5 ">
             <div className="row ">
-                <h3 className="mx-auto font-weight-bold ">Novo Evento</h3>
+                <h3 className="mx-auto font-weight-bold text-center">{id ? "Editar Evento" : "Novo Evento"}</h3>
                 
             </div>
 
             <form>
                 <div className="form-group">
                     <label>Titulo</label>
-                    <input onChange={(e) => setTitle(e.target.value)} type="text" className="form-control"/>
+                    <input onChange={(e) => setTitle(e.target.value)} type="text" className="form-control" value={title && title}/>
                 </div>
 
                 <div className="form-group">
                     <label>Tipo do Evento</label>
-                    <select  onChange={(e) => setType(e.target.value)} className="form-control">
+                    <select  onChange={(e) => setType(e.target.value)} className="form-control" value={type && type}>
                         <option disabled selected value>- Selecione o tipo de evento -</option> 
                         <option >Festa</option>
                         <option >Teatro</option>
@@ -90,17 +137,17 @@ export default function PostEvents(){
                 
                 <div className="form-group">
                     <label>Descrição do Evento</label>
-                    <textarea onChange={(e) => setDetails(e.target.value)} className="form-control" rows="3"></textarea>
+                    <textarea onChange={(e) => setDetails(e.target.value)} className="form-control" rows="3" value={details && details}></textarea>
                 </div>
 
                 <div className="form-group row">
                     <div className="col-6">
                         <label>Data:</label> <br/>
-                        <input onChange={(e) => setDate(e.target.value)} className="form-control" type="date" />
+                        <input onChange={(e) => setDate(e.target.value)} className="form-control" type="date" value={date && date}/>
                     </div>
                     <div className="col-6">
                         <label>Hora:</label> <br/>
-                        <input onChange={(e) => setTime(e.target.value)} className="form-control" type="time" />
+                        <input onChange={(e) => setTime(e.target.value)} className="form-control" type="time" value={time && time} />
                     </div>
                 </div>
 
@@ -110,7 +157,7 @@ export default function PostEvents(){
                 </div>
 
                 <div className="row">
-                    <button className="mx-auto" onClick={register} type="button">Publicar Evento</button>
+                    {<button className="mx-auto" onClick={id ? update : register} type="button">{id ? "Atualizar Evento" : "Novo Evento"}</button> }
                     {loading === true && <div class="spinner-border text-secondary mx-auto" role="status"></div>}
                 </div>
 

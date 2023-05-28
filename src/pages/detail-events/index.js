@@ -81,7 +81,7 @@ export default function DetailEvents(props) {
                 <div>
                     {
                         userLogado === eventData.usuario ?
-                        <Link to="" className="btn-edit">Editar<ion-icon name="create"></ion-icon></Link>
+                        <Link to={`/editevents/${id}`}className="btn-edit">Editar<ion-icon name="create"></ion-icon></Link>
                         : ''
                     }
                 </div> 

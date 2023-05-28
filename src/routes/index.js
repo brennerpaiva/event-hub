@@ -17,7 +17,7 @@ export default function RoutesApp() {
                 <Route path="/recoverpassword" element={<RecoverPassword/>} />
                 <Route path="/postevents" element={<PostEvents/>} />
                 <Route path="/detailevents/:id" element={<DetailEvents/>} />
-                
+                <Route path="/editevents/:id" element={<PostEvents/>} />
             </Routes>
     )   
 }
