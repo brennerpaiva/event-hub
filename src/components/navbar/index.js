@@ -28,7 +28,7 @@ export default function NavBar() {
                                 <Link to="/postevents">Publicar Evento</Link>
                             </li>
                             <li className="nav-item">
-                                <Link to="/">Meus Eventos</Link>
+                                <Link to="/events/myevents">Meus Eventos</Link>
                             </li>
                             <li className="nav-item">
                                 <Link onClick={() => dispatch({type: 'LOG_OUT'})} >Sair</Link>
