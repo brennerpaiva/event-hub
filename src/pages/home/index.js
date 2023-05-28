@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from "react";
 import "./home.css"
-import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import EventCard from "../../components/event-card";
 import { collection, onSnapshot, query, orderBy, where } from "firebase/firestore";
 import { db } from  "../../config/firebase"
-import { useParams } from "react-router-dom";
-
 
 export default function Home() {
 
@@ -18,7 +16,7 @@ export default function Home() {
 
     useEffect(() => {
       if (parameter) {       
-         
+
         const qWhere = query(
           eventRef,
           where("usuario", "==", usuarioEmail)

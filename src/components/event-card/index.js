@@ -4,7 +4,7 @@ import './event-card.css'
 import { storage } from "../../config/firebase";
 import { ref, getDownloadURL } from "firebase/storage";
 
-export default function EventCard({ eventKey, img, title, details, views }) {
+export default function EventCard({ id, img, title, details, views }) {
   const [imageUrl, setImageUrl] = useState('');
 
   useEffect(() => {
@@ -23,7 +23,7 @@ export default function EventCard({ eventKey, img, title, details, views }) {
 
         <div className="row d-flex align-items-center">
           <div className="col-8">
-            <Link to="#" className="btn btn-m btn-primary">Visitar</Link>
+            <Link to={`/detailevents/${id}`} className="btn btn-m btn-primary">Visitar</Link>
           </div>
           <div className="footer-card col-4">
             <ion-icon name="eye"></ion-icon>
