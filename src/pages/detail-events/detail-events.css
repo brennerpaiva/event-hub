@@ -1,8 +1,17 @@
+.spinner{
+    margin-top: 50px;
+}
+
 .img-banner{
     width: 100%;
     min-height: 300px;
     max-height: 350px;
     padding: 0;
+}
+
+ion-icon{
+    font-size: 20px;
+    padding: 4px;
 }
 
 .box-info{
@@ -26,3 +35,4 @@
 .title {
     color: #614ea6;
 }
+

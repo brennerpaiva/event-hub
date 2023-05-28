@@ -19,6 +19,7 @@ export default function Home() {
 
         const qWhere = query(
           eventRef,
+          orderBy("criacao", "desc"),
           where("usuario", "==", usuarioEmail)
         )
         loadEvents(qWhere)
@@ -29,7 +30,7 @@ export default function Home() {
           orderBy("criacao", "desc")
         )
 
-        loadEvents(qOrderBy);     
+        loadEvents(qOrderBy);    
       }
     
       }, [parameter]);
@@ -45,7 +46,6 @@ export default function Home() {
               ...doc.data()
             });
           });
-
           setEvents(lista);
         });
   
@@ -53,17 +53,15 @@ export default function Home() {
         
 
     return (
-        <>
-        <div className="row p-5 text-center">
-          <h3 className="mx-auto p-2">Eventos Publicados</h3>
-          
-        </div>
-
-        <div className="row">
-            { 
-            events.map(item => <EventCard id={item.id} img={item.imagem} title={item.titulo} details={item.detalhes} views={item.visualizacoes}/>)
-            }
-        </div>
+        <>      
+              <div className="row p-5 text-center">
+                <h3 className="mx-auto p-2">Eventos Publicados</h3>
+              </div>
+              <div className="row">
+                  {
+                  events.map(item => <EventCard id={item.id} img={item.imagem} title={item.titulo} details={item.detalhes} views={item.visualizacoes}/>)
+                  }
+              </div>
         </>
     )
 }

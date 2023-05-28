@@ -13,6 +13,7 @@ export default function DetailEvents(props) {
     const { id } = useParams();
     const [eventData, setEventData] = useState({})
     const [urlImg, setUrlImg] = useState('')
+    const [loading, setLoading] = useState(true)
 
     useEffect(() => {
         const fetchEventData = async () => {
@@ -24,7 +25,7 @@ export default function DetailEvents(props) {
           try {
             const url = await getDownloadURL(storageRef);
             setUrlImg(url);
-            console.log(urlImg);
+            setLoading(false)
           } catch (error) {
             console.error('Erro ao buscar a URL da imagem:', error);
           }
@@ -35,10 +36,21 @@ export default function DetailEvents(props) {
 
     return(
         <>
+            {
+            loading ? 
+            <div className='spinner text-center'>
+                <div class="spinner-border text-secondary mx-auto" role="status">
+            </div>
+            </div>
+            :
+
             <div className="container-fluid">
                 <div className="row">
                     <img className='img-banner' src={urlImg ? urlImg : ''} alt="imagem do anúncio"/>
-                    <h3 className='mx-auto mt-5 title'><strong>{eventData.titulo}</strong></h3>                </div>
+                    <div className='col-12 text-right mt-1'>
+                        <ion-icon name="eye"></ion-icon><span>{eventData.visualizacoes}</span>
+                    </div>
+                    <h3 className='mx-auto mt-5 title'><strong>{eventData.titulo}</strong></h3>                
                 </div>
 
                 <div className="row mt-5 d-flex justify-content-around">
@@ -66,11 +78,15 @@ export default function DetailEvents(props) {
                     <p className="text-justify p-3">{eventData.detalhes}</p>
                 </div>
                 
-                {
-                    userLogado === eventData.usuario ?
-                    <Link to="" className="btn-edit">Editar<ion-icon name="create"></ion-icon></Link>
-                    : ''
-                }
+                <div>
+                    {
+                        userLogado === eventData.usuario ?
+                        <Link to="" className="btn-edit">Editar<ion-icon name="create"></ion-icon></Link>
+                        : ''
+                    }
+                </div> 
+            </div>   
+        }            
         </>
     )
 }
