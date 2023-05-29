@@ -151,10 +151,12 @@ export default function PostEvents(){
                     </div>
                 </div>
 
+                { id ? "" :
                 <div className="form-group">
                         <label>Carregue uma imagem:</label> <br/>
                         <input type="file" onChange={(e) => setImage(e.target.files[0])} className="form-control" />
                 </div>
+                }
 
                 <div className="row">
                     {<button className="mx-auto" onClick={id ? update : register} type="button">{id ? "Atualizar Evento" : "Novo Evento"}</button> }

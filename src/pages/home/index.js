@@ -51,10 +51,10 @@ export default function Home() {
 
     return (
         <>      
-              <div className="row p-5 text-center">
+              <div className="p-5 text-center">
                 <h3 className="mx-auto p-2">Eventos Publicados</h3>
               </div>
-              <div className="row">
+              <div className="row mx-auto justify-content-center">
                   {
                   events.map(item => <EventCard id={item.id} img={item.imagem} title={item.titulo} details={item.detalhes} views={item.visualizacoes}/>)
                   }

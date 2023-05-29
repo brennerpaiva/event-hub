@@ -22,7 +22,7 @@ ion-icon{
     align-items: center;
 }
 
-.btn-edit{
+.btn-edit, .btn-remove{
     position: fixed;
     bottom: 10px;
     right: 10px;
@@ -30,6 +30,15 @@ ion-icon{
     background-color: #614ea6;
     padding: 4px;
     text-decoration: none;
+    display: flex;
+    border-radius: 4px;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+}
+
+.btn-remove{
+    right: 100px;
 }
 
 .title {

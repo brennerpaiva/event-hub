@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 import './detail-events.css';
 import { useSelector, useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import { db, storage } from '../../config/firebase';
-import { doc, getDoc } from 'firebase/firestore';
+import { doc, getDoc, deleteDoc } from 'firebase/firestore';
 import { ref, getDownloadURL } from "firebase/storage";
 import { useParams } from 'react-router-dom';
 
@@ -14,6 +14,7 @@ export default function DetailEvents(props) {
     const [eventData, setEventData] = useState({})
     const [urlImg, setUrlImg] = useState('')
     const [loading, setLoading] = useState(true)
+    const [deleted, setDeleted] = useState(false)
 
     useEffect(() => {
         const fetchEventData = async () => {
@@ -34,13 +35,33 @@ export default function DetailEvents(props) {
         fetchEventData();
       }, [id]);
 
+
+      async function deleteEvent() {
+            const docRef = doc(db, "eventos", id);
+            await deleteDoc(docRef)
+            .then(() => {
+                alert('Evento Deletado')
+                setDeleted(true)
+            })
+            .catch((error)=>{
+                alert(error)
+            })
+            
+          }
+          
+
     return(
         <>
+            {
+            deleted ? <Navigate to='/home'/> : null
+            }
+
+            <div className="container-fluid"></div>
             {
             loading ? 
             <div className='spinner text-center'>
                 <div class="spinner-border text-secondary mx-auto" role="status">
-            </div>
+                </div>
             </div>
             :
 
@@ -81,8 +102,13 @@ export default function DetailEvents(props) {
                 <div>
                     {
                         userLogado === eventData.usuario ?
-                        <Link to={`/editevents/${id}`}className="btn-edit">Editar<ion-icon name="create"></ion-icon></Link>
-                        : ''
+                        <Link to={`/editevents/${id}`} className="btn-edit">Editar<ion-icon name="create"></ion-icon></Link>
+                        : null
+                    }
+                    {
+                        userLogado === eventData.usuario ?
+                        <Link className="btn-remove" onClick={deleteEvent}>Excluir<ion-icon name="trash-bin"></ion-icon></Link>
+                        : null
                     }
                 </div> 
             </div>   
