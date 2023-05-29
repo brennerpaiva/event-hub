@@ -12,7 +12,7 @@
     object-fit: cover;
 }
 .card-text {
-    height: 100px;
+    height: 120px;
     overflow: hidden;
 }
 
