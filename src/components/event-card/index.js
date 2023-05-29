@@ -26,8 +26,8 @@ export default function EventCard({ id, img, title, details, views }) {
                 <Link to={`/detailevents/${id}`} className="btn btn-m btn-primary">Visitar</Link>
               </div>
               <div className="footer-card col-4">
-                <ion-icon name="eye"></ion-icon>
-                <span>{views}</span>
+                {/* <ion-icon name="eye"></ion-icon>
+                <span>{views}</span> */}
               </div>
             </div>
           </div>
