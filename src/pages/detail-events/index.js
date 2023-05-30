@@ -65,8 +65,8 @@ export default function DetailEvents(props) {
             </div>
             :
 
-            <div className="container-fluid">
-                <div className="row">
+            <div className="container-fluid p-0">
+                <div className="row text-center">
                     <img className='img-banner' src={urlImg ? urlImg : ''} alt="imagem do anúncio"/>
                     <div className='col-12 text-right mt-1'>
                         <ion-icon name="eye"></ion-icon><span>{eventData.visualizacoes}</span>
@@ -78,7 +78,7 @@ export default function DetailEvents(props) {
                     <div className="col-md-3 col-sm-12 box-info p-3">
                         <ion-icon name="ticket"></ion-icon>
                         <h5><strong>Tipo</strong></h5>
-                        <span className='mt-3'>{eventData.titulo}</span>
+                        <span className='mt-3'>{eventData.tipo}</span>
                     </div>
                     
                     <div className="col-md-3 col-sm-12 box-info p-3">
