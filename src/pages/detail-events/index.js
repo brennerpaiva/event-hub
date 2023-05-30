@@ -67,30 +67,30 @@ export default function DetailEvents(props) {
 
             <div className="container-fluid p-0">
                 <div className="row text-center">
-                    <img className='img-banner' src={urlImg ? urlImg : ''} alt="imagem do anúncio"/>
+                    <img className='img-banner p-0' src={urlImg ? urlImg : ''} alt="imagem do anúncio"/>
                     <div className='col-12 text-right mt-1'>
                         <ion-icon name="eye"></ion-icon><span>{eventData.visualizacoes}</span>
                     </div>
                     <h3 className='mx-auto mt-5 title'><strong>{eventData.titulo}</strong></h3>                
                 </div>
 
-                <div className="row mt-5 d-flex justify-content-around">
-                    <div className="col-md-3 col-sm-12 box-info p-3">
+                <div className="row mt-5 d-flex mx-auto justify-content-center">
+                    <div className="col-md-2 col-sm-10 box-info p-3 m-1">
                         <ion-icon name="ticket"></ion-icon>
                         <h5><strong>Tipo</strong></h5>
-                        <span className='mt-3'>{eventData.tipo}</span>
+                        <span className='mt-1'>{eventData.tipo}</span>
                     </div>
                     
-                    <div className="col-md-3 col-sm-12 box-info p-3">
-                        <ion-icon name="ticket"></ion-icon>
+                    <div className="col-md-2 col-sm-12 box-info p-3 m-1">
+                        <ion-icon name="calendar"></ion-icon>
                         <h5><strong>Data</strong></h5>
-                        <span className='mt-3'>{eventData.data}</span>
+                        <span className='mt-1'>{eventData.data}</span>
                     </div>
 
-                    <div className="col-md-3 col-sm-12 box-info p-3">
-                        <ion-icon name="ticket"></ion-icon>
+                    <div className="col-md-2 col-sm-12 box-info p-3 m-1">
+                        <ion-icon name="time"></ion-icon>
                         <h5><strong>Hora</strong></h5>
-                        <span className='mt-3'>{eventData.hora}</span>
+                        <span className='mt-1'>{eventData.hora}</span>
                     </div>
                 </div>
 
